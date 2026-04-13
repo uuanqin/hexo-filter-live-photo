@@ -1,6 +1,6 @@
 {
   "name": "hexo-filter-live-photo",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Add live photo to your Hexo blog.",
   "main": "index.js",
   "scripts": {
