@@ -1,15 +1,33 @@
+:root {
+  --live-brand-color: #ff2e4d;
+  --live-bg-gray: #f0f0f0;
+  --live-error-bg: #f8f8f8;
+  --live-radius-lg: 12px;
+  --live-radius-sm: 8px;
+  --live-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
 /* Live Photo 容器 */
 .live-photo-container {
   position: relative;
-  border-radius: 12px;
-  margin: 20px 0;
+  border-radius: var(--live-radius-lg);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 100%;
+  transition: transform var(--live-transition), box-shadow var(--live-transition);  max-width: 100%;
   overflow: hidden;
-  display: block;
+  display: flex;
   line-height: 0;
+  margin: 20px auto;
+  width: fit-content;
+  background: var(--live-bg-gray);
+  justify-content: center;
+  align-items: center;
+}
+
+.live-photo-container:not(.live-photo-image-grid):not(.live-photo-image-grid-grid) {
+  display: table; /* 既能实现 fit-content 效果，又能支持 margin: auto 居中 */
+  margin: 20px auto;
 }
 
 .live-photo-container a {
@@ -17,8 +35,9 @@
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: 2;
-  pointer-events: none !important;
+  pointer-events: none;
 }
+
 .live-photo-container .caption,
 .live-photo-container span.caption {
   display: none !important;
@@ -34,31 +53,29 @@
   position: absolute !important;
   top: 0;
   left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
   z-index: 2;
-  border-radius: 8px;
-  transition: opacity 0.3s;
+  border-radius: inherit;
+  transition: opacity var(--live-transition);
   pointer-events: none;
   margin: 0 !important;
+  background-color: var(--live-bg-gray);
+  color: transparent;
+  text-indent: -10000px;
+}
+
+/* 如果图片报错了，确保它绝对不会由于任何 hover 效果又跳出来 */
+.live-photo-container.is-loading .live-photo-static[style*="visibility: hidden"] {
+  opacity: 0 !important;
 }
 
 /* 视频元素 */
 .live-photo-video {
-  position: relative !important;
-  width: 100%;
-  height: auto;
+  position: relative;
   display: block;
-  object-fit: cover;
-  border-radius: 8px;
+  border-radius: var(--live-radius-sm);
   z-index: 1;
-  opacity: 1 !important;
+  /*opacity: 1 !important;*/
 }
-
-/*.live-photo-video.playing {*/
-/*  opacity: 1;*/
-/*}*/
 
 /* Live 标识 */
 .live-badge {
@@ -321,7 +338,7 @@
 
 /* 确保单图布局不受影响 */
 .live-photo-container:not(.live-photo-image-grid):not(.live-photo-image-grid-grid):not(.live-photo-image-float-container) {
-  margin: 20px 0;
+  margin: 20px auto;
 }
 
 /* 标题样式调整 */
@@ -411,3 +428,95 @@
 
 .live-sound-toggle.is-unmuted .sound-on-icon { display: block; }
 .live-sound-toggle.is-unmuted .sound-off-icon { display: none; }
+
+/* 错误占位符基础样式 */
+.live-error-placeholder {
+  display: none; /* 默认隐藏 */
+  width: 100%;
+  height: 200px; /* 默认一个高度，或者根据容器高度 */
+  background: #f5f5f5;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.live-error-placeholder svg {
+  fill: #ccc; /* 灰色图标 */
+  /* 调整这里的值，直到你觉得哭脸大小合适 */
+  width: 60px !important;
+  height: 60px !important;
+
+  /* 防止 SVG 溢出或受到父级 line-height 影响 */
+  display: block;
+  margin: 0 auto;
+}
+
+/* 当触发全错状态时 */
+.live-photo-container.is-total-error {
+  width: 60%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  background: var(--live-error-bg);
+}
+
+.live-photo-container.is-total-error > * {
+  display: none !important;
+}
+
+.live-photo-container.is-total-error .live-error-placeholder {
+  display: flex !important; /* 强制显示 */
+  width: 100%;
+  height: 200px; /* 报错时给个固定高度，避免容器塌陷 */
+  background: #f8f8f8;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 关键：全错时，强制隐藏所有其他元素，彻底根除“裂开图标” */
+.is-total-error .live-photo-static,
+.is-total-error .live-photo-video,
+.is-total-error .live-badge,
+.is-total-error .live-sound-toggle,
+.is-total-error .live-loading {
+  display: none !important;
+}
+
+.is-total-error a,
+.is-total-error img,
+.is-total-error .caption {
+  display: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+}
+
+/* 1. 隐藏视频及其交互组件 */
+.is-video-error .live-photo-video,
+.is-video-error .live-badge,
+.is-video-error .live-sound-toggle,
+.is-video-error .live-loading {
+  display: none !important;
+}
+
+/* 2. 关键：解除 Fancybox 链接和图片的绝对定位 */
+/* 因为 HTML 结构是 container -> a -> img */
+.live-photo-container.is-video-error a,
+.live-photo-container.is-video-error .live-photo-static {
+  position: relative !important;
+  display: block !important;
+  top: auto !important;
+  left: auto !important;
+  opacity: 1 !important;
+  pointer-events: auto !important; /* 允许点击放大 */
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* 3. 容器适配：如果是 table 布局，强制在错误时表现为 block 以便撑开 */
+.live-photo-container.is-video-error {
+  display: block !important;
+  height: auto !important;
+  cursor: default;
+  background: transparent;
+}

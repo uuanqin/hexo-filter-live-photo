@@ -56,22 +56,27 @@ livephoto:
   hover_delay: 300              # Delay before hover playback (ms)
   weixin_disable_autoplay: true # Disable autoplay in WeChat environment
   loop: false                   # Global loop setting for videos
+  inject_to: default            # Injection scope: default, home, post, page, etc. Defaults to default.
 ```
 
 ## Usage
 
 Insert Live Photos by using the `livephoto` or `live-photo` custom code block in your Markdown files.
 
+````
 ```livephoto
 src: /live-photo.mp4
 ```
+````
 
 OR
 
+````
 ```live-photo
 video: /live-photo.mp4
 cover: /live-photo-cover.jpg
 ```
+````
 
 Parameter Details:
 

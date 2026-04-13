@@ -15,4 +15,5 @@ livephoto:
   hover_delay: 300        # 悬停延迟（毫秒）
   weixin_disable_autoplay: true # 微信环境下禁用自动播放
   loop: false                # 是否循环播放视频
+  inject_to: default      # 注入范围：default, home, post, page 等。默认 default.
   

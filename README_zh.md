@@ -49,22 +49,27 @@ livephoto:
   hover_delay: 300              # 悬停延迟（毫秒）
   weixin_disable_autoplay: true # 微信环境下禁用自动播放
   loop: false                   # 是否循环播放视频（全局配置）
+  inject_to: default            # 注入范围：default, home, post, page 等。默认 default.
 ```
 
 ## 使用
 
 通过在 Markdown 文章中使用 **自定义代码块** `livephoto` 或 `live-photo` 完成动图的插入。
 
+````
 ```livephoto
 src: /live-photo.mp4
 ```
+````
 
 或者
 
+````
 ```live-photo
 video: /live-photo.mp4
 cover: /live-photo-cover.jpg
 ```
+````
 
 全部参数说明：
 

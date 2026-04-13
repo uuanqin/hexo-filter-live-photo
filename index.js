@@ -19,7 +19,8 @@ const defaultConfig = {
   keep_observing: false,
   hover_delay: 300,
   weixin_disable_autoplay: true,
-  loop: false
+  loop: false,
+  inject_to: 'default'
 };
 
 // 主插件类

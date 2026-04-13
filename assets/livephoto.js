@@ -10,6 +10,8 @@ class HexoLivePhoto {
     this.hoverTimeout = null;
     this.badgeTimer = null; // 显式声明计时器
     this.isWeixin = this.detectWeixinBrowser();
+    this.imgFailed = false;
+    this.videoFailed = false;
     this.soundToggle = container.querySelector(".live-sound-toggle");
     // 在微信环境中调整配置
     if (this.isWeixin && this.config.weixin_disable_autoplay) {
@@ -91,7 +93,10 @@ class HexoLivePhoto {
     this.video.addEventListener("playing", () => {
       if (this.badgeTimer) clearTimeout(this.badgeTimer);
       this.container.classList.remove('is-loading');
-      this.staticImage.style.opacity = 0;
+      // 只有在图片没坏的情况下，才去做这种淡出效果
+      if (!this.imgFailed) {
+        this.staticImage.style.opacity = 0;
+      }
       this.video.classList.add("playing");
     });
 
@@ -102,6 +107,42 @@ class HexoLivePhoto {
         e.stopPropagation();
         this.toggleSound();
       });
+    }
+
+    // 图片加载失败：隐藏图片，防止出现浏览器默认的“裂开”图标
+    this.staticImage.onerror = () => {
+      this.imgFailed = true;
+      this.staticImage.style.opacity = '0';
+      this.staticImage.style.visibility = 'hidden';
+      this.checkTotalFailure();
+    };
+
+    // 视频加载失败
+    this.video.onerror = () => {
+      this.videoFailed = true;
+      this.checkTotalFailure();
+    };
+  }
+
+  checkTotalFailure() {
+    // 1. 判断图片是否失效：包括加载失败、src为空、或者是那个1x1的透明占位符
+    const isImgInvalid = this.imgFailed ||
+      !this.staticImage.src ||
+      this.staticImage.src.includes('data:image/gif');
+
+    if (this.videoFailed) {
+      if (isImgInvalid) {
+        // 情况 A：全错（视频坏了 + 图片也坏了）
+        this.container.classList.add('is-total-error');
+        this.container.classList.remove('is-video-error'); // 必须移除，防止干扰 CSS
+      } else {
+        // 情况 B：仅视频错（视频坏了 + 图片是好的）
+        this.container.classList.add('is-video-error');
+        this.container.classList.remove('is-total-error');
+      }
+    } else {
+      // 如果视频没坏，确保这两个错误类都不存在
+      this.container.classList.remove('is-total-error', 'is-video-error');
     }
   }
 
