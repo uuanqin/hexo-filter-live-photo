@@ -1,0 +1,413 @@
+/* Live Photo 容器 */
+.live-photo-container {
+  position: relative;
+  border-radius: 12px;
+  margin: 20px 0;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%;
+  overflow: hidden;
+  display: block;
+  line-height: 0;
+}
+
+.live-photo-container a {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
+  pointer-events: none !important;
+}
+.live-photo-container .caption,
+.live-photo-container span.caption {
+  display: none !important;
+}
+
+.live-photo-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* 静态图片 */
+.live-photo-static {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  z-index: 2;
+  border-radius: 8px;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  margin: 0 !important;
+}
+
+/* 视频元素 */
+.live-photo-video {
+  position: relative !important;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+  z-index: 1;
+  opacity: 1 !important;
+}
+
+/*.live-photo-video.playing {*/
+/*  opacity: 1;*/
+/*}*/
+
+/* Live 标识 */
+.live-badge {
+  position: absolute;
+  /* 增加透明度层次感，模拟 iOS 的磨砂玻璃 */
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+
+  /* 优化间距：减小左右，增加上下呼吸感 */
+  padding: 5px 10px;
+  border-radius: 6px; /* 稍微加大圆角，显得更现代 */
+
+  /* 字体优化：使用系统级无衬线字体，增加字间距 */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 11px;    /* 稍微调小一点点，更精致 */
+  font-weight: 600;   /* 半粗体增加专业感 */
+  letter-spacing: 0.05em; /* 关键：增加字间距，提升高级感 */
+  text-transform: uppercase; /* 强制大写 */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  z-index: 10;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 移除过宽的 min-width，改为自适应内容 */
+  min-width: unset;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: none; /* 防止遮挡容器点击 */
+}
+
+.live-badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;  /* 稍微缩小，显得更精致 */
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ff2e4d;
+  /* 增加一点点外发光 */
+  box-shadow: 0 0 4px rgba(255, 46, 77, 0.6);
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* 防止被挤压 */
+}
+
+/* 位置变体 */
+.live-badge.bottom-left {
+  bottom: 12px;
+  left: 12px;
+}
+
+.live-badge.bottom-right {
+  bottom: 12px;
+  right: 12px;
+}
+
+.live-badge.top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.live-badge.top-right {
+  top: 12px;
+  right: 12px;
+}
+
+/* 加载指示器 */
+.live-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ff2e4d;
+  animation: livephoto-spin 1s ease-in-out infinite;
+  display: none;
+  z-index: 1;
+}
+
+@keyframes livephoto-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 标题样式 */
+.live-caption {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .live-photo-container {
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+  
+  .live-badge {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+  
+  .live-badge.bottom-left,
+  .live-badge.bottom-right {
+    bottom: 8px;
+  }
+  
+  .live-badge.bottom-left,
+  .live-badge.top-left {
+    left: 8px;
+  }
+  
+  .live-badge.bottom-right,
+  .live-badge.top-right {
+    right: 8px;
+  }
+  
+  .live-badge.top-left,
+  .live-badge.top-right {
+    top: 8px;
+  }
+  
+}
+
+/* 多图布局容器 */
+.live-photo-image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0;
+  gap: 15px; /* 使用gap属性设置间距 */
+}
+
+.live-photo-image-column {
+  flex: 0 0 calc(50% - 8px); /* 每列占50%宽度减去一半的间距 */
+  min-width: 0; /* 防止内容溢出 */
+}
+
+/* Grid布局 */
+.live-photo-image-grid-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 始终保持两列 */
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.live-photo-grid-item {
+  position: relative;
+  min-width: 0; /* 防止内容溢出 */
+}
+
+/* 浮动布局 */
+.live-photo-image-float-container {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.live-photo-float-image {
+  flex: 0 0 calc(50% - 8px); /* 每列占50%宽度减去一半的间距 */
+}
+
+/* Live Photo 容器适配多图布局 */
+.live-photo-image-grid .live-photo-container,
+.live-photo-image-grid-grid .live-photo-container,
+.live-photo-image-float-container .live-photo-container {
+  margin: 0; /* 移除单独设置的外边距 */
+  border-radius: 8px; /* 稍微减小圆角以适应小屏幕 */
+}
+
+/* 确保图片和视频在多图布局中正确显示 */
+.live-photo-image-grid .live-photo-static,
+.live-photo-image-grid-grid .live-photo-static,
+.live-photo-image-float-container .live-photo-static,
+.live-photo-image-grid .live-photo-video,
+.live-photo-image-grid-grid .live-photo-video,
+.live-photo-image-float-container .live-photo-video {
+  border-radius: 8px; /* 与容器保持一致 */
+}
+
+/* 调整Live标识在小屏幕上的大小 */
+.live-photo-image-grid .live-badge,
+.live-photo-image-grid-grid .live-badge,
+.live-photo-image-float-container .live-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+}
+
+.live-photo-image-grid .live-badge.bottom-left,
+.live-photo-image-grid-grid .live-badge.bottom-left,
+.live-photo-image-float-container .live-badge.bottom-left,
+.live-photo-image-grid .live-badge.bottom-right,
+.live-photo-image-grid-grid .live-badge.bottom-right,
+.live-photo-image-float-container .live-badge.bottom-right {
+  bottom: 8px;
+}
+
+.live-photo-image-grid .live-badge.bottom-left,
+.live-photo-image-grid-grid .live-badge.bottom-left,
+.live-photo-image-float-container .live-badge.bottom-left,
+.live-photo-image-grid .live-badge.top-left,
+.live-photo-image-grid-grid .live-badge.top-left,
+.live-photo-image-float-container .live-badge.top-left {
+  left: 8px;
+}
+
+.live-photo-image-grid .live-badge.bottom-right,
+.live-photo-image-grid-grid .live-badge.bottom-right,
+.live-photo-image-float-container .live-badge.bottom-right,
+.live-photo-image-grid .live-badge.top-right,
+.live-photo-image-grid-grid .live-badge.top-right,
+.live-photo-image-float-container .live-badge.top-right {
+  right: 8px;
+}
+
+.live-photo-image-grid .live-badge.top-left,
+.live-photo-image-grid-grid .live-badge.top-left,
+.live-photo-image-float-container .live-badge.top-left,
+.live-photo-image-grid .live-badge.top-right,
+.live-photo-image-grid-grid .live-badge.top-right,
+.live-photo-image-float-container .live-badge.top-right {
+  top: 8px;
+}
+
+/* 非常小的设备调整 */
+@media (max-width: 360px) {
+  .live-photo-image-grid {
+    gap: 10px;
+  }
+  
+  .live-photo-image-column {
+    flex: 0 0 calc(50% - 5px); /* 调整间距 */
+  }
+  
+  .live-photo-image-grid-grid {
+    gap: 10px;
+  }
+  
+  .live-photo-float-image {
+    flex: 0 0 calc(50% - 5px); /* 调整间距 */
+  }
+  
+  /* 进一步调整Live标识 */
+  .live-photo-image-grid .live-badge,
+  .live-photo-image-grid-grid .live-badge,
+  .live-photo-image-float-container .live-badge {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+}
+
+/* 确保单图布局不受影响 */
+.live-photo-container:not(.live-photo-image-grid):not(.live-photo-image-grid-grid):not(.live-photo-image-float-container) {
+  margin: 20px 0;
+}
+
+/* 标题样式调整 */
+.live-caption {
+  font-size: 13px; /* 稍微减小字体大小 */
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* 确保加载指示器在多图布局中正确显示 */
+.live-photo-image-grid .live-loading,
+.live-photo-image-grid-grid .live-loading,
+.live-photo-image-float-container .live-loading {
+  width: 30px;
+  height: 30px;
+}
+
+/* 加载状态下的视觉反馈 */
+.live-photo-container.is-loading .live-badge {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.live-photo-container.is-loading .live-badge::before {
+  background-color: #ffcc00;
+  box-shadow: 0 0 6px rgba(255, 204, 0, 0.8);
+  animation: live-photo-blink 0.5s infinite alternate cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes live-photo-blink {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .live-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* 声音控制按钮容器 */
+.live-sound-toggle {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: scale(0.8);
+  /* 注意：这里保留了容器显示的动画，但去掉了内部元素的延迟 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: white; /* 关键：这会让 SVG 的 currentColor 生效为白色 */
+}
+
+.live-photo-container:hover .live-sound-toggle,
+.live-photo-container.is-playing .live-sound-toggle {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 添加一个小细节：点击时的按压反馈，让用户觉得更顺手 */
+.live-sound-toggle:active {
+  transform: scale(0.9);
+}
+
+/* SVG 显示/隐藏逻辑：采用 display none 实现 0 毫秒瞬间切换，缓解声音卡顿焦虑 */
+.sound-on-icon { display: none; }
+.sound-off-icon { display: block; }
+
+.live-sound-toggle.is-unmuted .sound-on-icon { display: block; }
+.live-sound-toggle.is-unmuted .sound-off-icon { display: none; }
