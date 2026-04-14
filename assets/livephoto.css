@@ -14,7 +14,8 @@
   border-radius: var(--live-radius-lg);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform var(--live-transition), box-shadow var(--live-transition);  max-width: 100%;
+  transition: transform var(--live-transition), box-shadow var(--live-transition);
+  max-width: 100%;
   overflow: hidden;
   display: flex;
   line-height: 0;
@@ -32,8 +33,10 @@
 
 .live-photo-container a {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   pointer-events: none;
 }
@@ -80,7 +83,6 @@
 /* Live 标识 */
 .live-badge {
   position: absolute;
-  /* 增加透明度层次感，模拟 iOS 的磨砂玻璃 */
   background: rgba(0, 0, 0, 0.55);
   color: #ffffff;
 
@@ -90,8 +92,8 @@
 
   /* 字体优化：使用系统级无衬线字体，增加字间距 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 11px;    /* 稍微调小一点点，更精致 */
-  font-weight: 600;   /* 半粗体增加专业感 */
+  font-size: 11px; /* 稍微调小一点点，更精致 */
+  font-weight: 600; /* 半粗体增加专业感 */
   letter-spacing: 0.05em; /* 关键：增加字间距，提升高级感 */
   text-transform: uppercase; /* 强制大写 */
 
@@ -104,17 +106,15 @@
   backdrop-filter: blur(12px) saturate(180%);
   z-index: 10;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* 移除过宽的 min-width，改为自适应内容 */
   min-width: unset;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  pointer-events: none; /* 防止遮挡容器点击 */
+  pointer-events: none;
 }
 
 .live-badge::before {
   content: '';
   display: inline-block;
-  width: 6px;  /* 稍微缩小，显得更精致 */
+  width: 6px; /* 稍微缩小，显得更精致 */
   height: 6px;
   border-radius: 50%;
   background-color: #ff2e4d;
@@ -162,7 +162,9 @@
 }
 
 @keyframes livephoto-spin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 /* 标题样式 */
@@ -179,32 +181,32 @@
     border-radius: 8px;
     margin: 16px 0;
   }
-  
+
   .live-badge {
     font-size: 11px;
     padding: 3px 6px;
   }
-  
+
   .live-badge.bottom-left,
   .live-badge.bottom-right {
     bottom: 8px;
   }
-  
+
   .live-badge.bottom-left,
   .live-badge.top-left {
     left: 8px;
   }
-  
+
   .live-badge.bottom-right,
   .live-badge.top-right {
     right: 8px;
   }
-  
+
   .live-badge.top-left,
   .live-badge.top-right {
     top: 8px;
   }
-  
+
 }
 
 /* 多图布局容器 */
@@ -314,19 +316,19 @@
   .live-photo-image-grid {
     gap: 10px;
   }
-  
+
   .live-photo-image-column {
     flex: 0 0 calc(50% - 5px); /* 调整间距 */
   }
-  
+
   .live-photo-image-grid-grid {
     gap: 10px;
   }
-  
+
   .live-photo-float-image {
     flex: 0 0 calc(50% - 5px); /* 调整间距 */
   }
-  
+
   /* 进一步调整Live标识 */
   .live-photo-image-grid .live-badge,
   .live-photo-image-grid-grid .live-badge,
@@ -423,11 +425,21 @@
 }
 
 /* SVG 显示/隐藏逻辑：采用 display none 实现 0 毫秒瞬间切换，缓解声音卡顿焦虑 */
-.sound-on-icon { display: none; }
-.sound-off-icon { display: block; }
+.sound-on-icon {
+  display: none;
+}
 
-.live-sound-toggle.is-unmuted .sound-on-icon { display: block; }
-.live-sound-toggle.is-unmuted .sound-off-icon { display: none; }
+.sound-off-icon {
+  display: block;
+}
+
+.live-sound-toggle.is-unmuted .sound-on-icon {
+  display: block;
+}
+
+.live-sound-toggle.is-unmuted .sound-off-icon {
+  display: none;
+}
 
 /* 错误占位符基础样式 */
 .live-error-placeholder {
@@ -442,11 +454,8 @@
 
 .live-error-placeholder svg {
   fill: #ccc; /* 灰色图标 */
-  /* 调整这里的值，直到你觉得哭脸大小合适 */
   width: 60px !important;
   height: 60px !important;
-
-  /* 防止 SVG 溢出或受到父级 line-height 影响 */
   display: block;
   margin: 0 auto;
 }
@@ -465,10 +474,10 @@
 }
 
 .live-photo-container.is-total-error .live-error-placeholder {
-  display: flex !important; /* 强制显示 */
+  display: flex !important;
   width: 100%;
   height: 200px; /* 报错时给个固定高度，避免容器塌陷 */
-  background: #f8f8f8;
+  background: var(--live-error-bg);
   flex-direction: column;
   align-items: center;
   justify-content: center;
