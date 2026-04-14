@@ -9,7 +9,7 @@ class HexoLivePhoto {
     this.isPlaying = false;
     this.hoverTimeout = null;
     this.badgeTimer = null; // 显式声明计时器
-    this.isWeixin = this.detectWeixinBrowser();
+    this.isWeixin = /micromessenger/i.test(navigator.userAgent);
     this.imgFailed = false;
     this.videoFailed = false;
     this.soundToggle = container.querySelector(".live-sound-toggle");
@@ -46,9 +46,9 @@ class HexoLivePhoto {
 
     // 修改badge内容和样式
     if (badge) {
-      if(!this.config.badge_text) {
+      if (!this.config.badge_text) {
         badge.innerHTML = "Click to Play";
-      } else{
+      } else {
         badge.innerHTML = this.config.badge_text + " | Click to Play";
       }
     }
@@ -125,7 +125,7 @@ class HexoLivePhoto {
   }
 
   checkTotalFailure() {
-    // 1. 判断图片是否失效：包括加载失败、src为空、或者是那个1x1的透明占位符
+    // 判断图片是否失效：包括加载失败、src为空、或者是那个1x1的透明占位符
     const isImgInvalid = this.imgFailed ||
       !this.staticImage.src ||
       this.staticImage.src.includes('data:image/gif');
@@ -277,9 +277,9 @@ class HexoLivePhoto {
 class HexoLivePhotoPage {
   constructor(config) {
     this.config = config;
-    this.livePhotos = [];
+    this.livePhotos = new Map();
     this.observer = null;
-
+    this.isWeixin = /micromessenger/i.test(navigator.userAgent);
     this.init();
   }
 
@@ -288,12 +288,12 @@ class HexoLivePhotoPage {
     this.detectLivePhotos();
 
     // 检测是否为微信环境
-    const isWeixin = navigator.userAgent
-      .toLowerCase()
-      .includes("micromessenger");
+    // const isWeixin = navigator.userAgent
+    //   .toLowerCase()
+    //   .includes("micromessenger");
 
     // 如果在微信环境中且禁用自动播放，则不设置Intersection Observer
-    if (isWeixin && this.config.weixin_disable_autoplay) {
+    if (this.isWeixin && this.config.weixin_disable_autoplay) {
       return;
     }
 
@@ -314,7 +314,7 @@ class HexoLivePhotoPage {
       // 检查是否已经初始化过
       if (!container.dataset.initialized) {
         const livePhoto = new HexoLivePhoto(container, this.config);
-        this.livePhotos.push(livePhoto);
+        this.livePhotos.set(container, livePhoto);
         container.dataset.initialized = "true";
       }
     });
@@ -330,33 +330,28 @@ class HexoLivePhotoPage {
       (entries) => {
         entries.forEach((entry) => {
           const container = entry.target;
-          const livePhoto = this.livePhotos.find((lp) => lp.container === container);
+          const livePhoto = this.livePhotos.get(container);
+          if (!livePhoto) return;
 
           if (entry.isIntersecting) {
             // 进入屏幕：自动播放
-            if (livePhoto) {
-              livePhoto.autoPlay();
-              if (!this.config.keep_observing) {
-                this.observer.unobserve(container);
-              }
+            livePhoto.autoPlay();
+            if (!this.config.keep_observing) {
+              this.observer.unobserve(container);
             }
-          } else {
+          } else if (livePhoto.isPlaying) {
             // 移出屏幕时，必须强制停止播放
-            if (livePhoto && livePhoto.isPlaying) {
-              livePhoto.stop();
-            }
+            livePhoto.stop();
           }
         });
       },
       {
-        threshold: this.config.threshold,
+        threshold: this.config.threshold || 0.1,
         rootMargin: "0px 0px 10% 0px",
       }
     );
 
-    this.livePhotos.forEach((livePhoto) => {
-      this.observer.observe(livePhoto.container);
-    });
+    this.livePhotos.forEach((_, el) => this.observer.observe(el));
   }
 }
 
