@@ -13,7 +13,7 @@ In the corners of the park, we often encounter leisurely kittens. They either la
 src: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads/main/docs/images/cat.mp4
 poster: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads/main/docs/images/cat.jpg
 width: 400px
-caption: 鹅岭公园小猫
+caption: 鹅岭公园小猫 Kitten in Eling Park
 ```
 
 这是最基础的动态图片展示方式，只设置了视频源、封面图和宽度。点击或鼠标悬停即可播放一次小猫的动态画面，还原真实场景。
@@ -25,7 +25,7 @@ src: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads
 poster: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads/main/docs/images/cat.jpg
 loop: true
 width: 400px
-caption: 循环播放的动图
+caption: 循环播放的动图 Loop-Playing Live Photo
 ```
 
 开启循环播放后，小猫的动态会一直重复展示，非常适合用来突出可爱的小动作，让画面更生动有趣。
@@ -43,7 +43,7 @@ src: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads
 poster: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads/main/docs/images/cat.jpg
 loop: true
 height: 200px
-caption: 只设定高度
+caption: 只设定高度 Only Set Height
 ```
 
 只设置高度而不指定宽度，插件会自动按照视频原始比例进行适配，保证动态图片不会变形拉伸。
@@ -60,7 +60,7 @@ poster: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/he
 loop: true
 width: 350px
 height: 250px
-caption: 设定了宽高
+caption: 设定了宽高 Set Both Width and Height
 ```
 
 如果你不想手动设置尺寸，也可以完全不填写 width 和 height 参数，插件会使用默认展示方式。
@@ -70,7 +70,7 @@ If you don’t want to set the size manually, you can leave the width and height
 ```livephoto
 src: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads/main/docs/images/cat.mp4
 poster: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads/main/docs/images/cat.jpg
-caption: 不设定尺寸参数
+caption: 不设定尺寸参数 No Size Parameters Set
 ```
 
 ---
@@ -88,7 +88,7 @@ src: https://example.com/xxx/xxxxxx.mp4
 poster: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads/main/docs/images/cat.jpg
 loop: true
 width: 400px
-caption: 设置了错误的视频地址、正确的封面地址
+caption: 设置了错误的视频地址、正确的封面地址 Incorrect Video URL, Correct Poster URL
 ```
 
 如果封面地址错误但视频地址有效，插件仍会尝试加载并展示动态图片，保证核心功能可以正常使用。
@@ -100,7 +100,7 @@ src: https://raw.githubusercontent.com/uuanqin/hexo-filter-live-photo/refs/heads
 poster: https://example.com/xxx/xxxxxx.jpg
 loop: true
 width: 400px
-caption: 设置了错误的封面地址、正确的视频地址
+caption: 设置了错误的封面地址、正确的视频地址 Incorrect Poster URL, Correct Video URL
 ```
 
 当视频地址与封面地址均无效时，插件会展示占位状态，不会破坏页面结构，提升用户体验。
@@ -112,7 +112,7 @@ src: https://example.com/xxx/xxxxxx.mp4
 poster: https://example.com/xxx/xxxxxx.jpg
 loop: true
 width: 400px
-caption: 设置了错误的封面地址、视频地址
+caption: 设置了错误的封面地址、视频地址 Incorrect Poster and Video URLs
 ```
 
 通过以上各种示例，你可以清楚地看到本插件在不同配置、不同异常情况下的表现，方便你在自己的 Hexo 博客中灵活使用动态图片功能。
