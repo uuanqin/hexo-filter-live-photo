@@ -15,10 +15,14 @@ Language: [English](./README.md) | 中文
 - 支持交互式声音按钮，并优化声音播放体验。
 - 其他在视觉、性能以及用户体验方面的优化。
 
-![img](./screenshots/demonstrate.gif)
-
 > [!IMPORTANT]
 > 本插件不支持 Hexo 的 Tag 标签语法。习惯使用标签语法的朋友请参考 [@cykzht/hexo-live-photo](https://github.com/cykzht/hexo-live-photo/tree/master)。
+
+## 预览
+
+![img](docs/images/demonstrate.gif)
+
+你也可以在下载  [此 Markdown 文件](./docs/live-photo-demonstration.md) 放入你的 Hexo 博客中测试效果。 
 
 ## 安装
 

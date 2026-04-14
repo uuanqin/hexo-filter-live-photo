@@ -22,10 +22,14 @@ This plugin is a secondary development based on [@cykzht/hexo-live-photo](https:
 
 - Enhanced Experience: Various optimizations across visual design, performance, and user interaction.
 
-![img](./screenshots/demonstrate.gif)
-
 > [!IMPORTANT]
 > This plugin does not support Hexo's Tag syntax. If you prefer using Tag plugins, please refer to [@cykzht/hexo-live-photo](https://github.com/cykzht/hexo-live-photo/tree/master).
+
+## Demonstration
+
+![img](docs/images/demonstrate.gif)
+
+You can also download this [Markdown file](./docs/live-photo-demonstration.md) and place it in your Hexo blog to test the effect.
 
 ## Installation
 
