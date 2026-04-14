@@ -25,12 +25,6 @@ class HexoLivePhoto {
     this.bindEvents();
   }
 
-  // 检测微信浏览器
-  detectWeixinBrowser() {
-    const ua = navigator.userAgent.toLowerCase();
-    return ua.includes("micromessenger");
-  }
-
   // 修改微信环境下的badge
   modifyWeixinBadge() {
     let badge = this.container.querySelector(".live-badge");
@@ -201,19 +195,6 @@ class HexoLivePhoto {
   play() {
     if (this.isPlaying) return;
     this.isPlaying = true;
-
-
-    // if (this.badgeTimer) clearTimeout(this.badgeTimer);
-
-    // 只有当视频还没有准备好播放时，才开启加载状态计时器
-    // readyState < 3 表示数据不足以支撑流畅播放
-    // if (this.video.readyState < 3) {
-    //   this.badgeTimer = setTimeout(() => {
-    //     this.container.classList.add('is-loading');
-    //     // 不再修改文字，保持原样
-    //   }, 300);
-    // }
-
 
     const playPromise = this.video.play();
 

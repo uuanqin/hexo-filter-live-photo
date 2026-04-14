@@ -117,7 +117,7 @@
   width: 6px; /* 稍微缩小，显得更精致 */
   height: 6px;
   border-radius: 50%;
-  background-color: #ff2e4d;
+  background-color: var(--live-brand-color);
   /* 增加一点点外发光 */
   box-shadow: 0 0 4px rgba(255, 46, 77, 0.6);
   transition: background-color 0.3s ease;
@@ -155,7 +155,7 @@
   height: 40px;
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  border-top-color: #ff2e4d;
+  border-top-color: var(--live-brand-color);
   animation: livephoto-spin 1s ease-in-out infinite;
   display: none;
   z-index: 1;
