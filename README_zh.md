@@ -22,7 +22,7 @@ Language: [English](./README.md) | 中文
 
 ![img](docs/images/demonstrate.gif)
 
-你也可以在下载  [此 Markdown 文件](./docs/live-photo-demonstration.md) 放入你的 Hexo 博客中测试效果。 
+你也可以在下载  [此 Markdown 文件](./docs/live-photo-demonstration.md) 放入你的 Hexo 博客中测试效果。或者直接浏览 [该网页](https://blog.uuanqin.top/p/6338f82f/)，查看插件在 Hexo-Butterfly 主题下的展示效果。
 
 ## 安装
 

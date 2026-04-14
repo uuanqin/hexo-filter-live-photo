@@ -30,6 +30,7 @@ This plugin is a secondary development based on [@cykzht/hexo-live-photo](https:
 ![img](docs/images/demonstrate.gif)
 
 You can also download this [Markdown file](./docs/live-photo-demonstration.md) and place it in your Hexo blog to test the effect.
+Alternatively, you can visit [this page](https://blog.uuanqin.top/p/6338f82f/) directly to see how the plugin performs under the Hexo-Butterfly theme.
 
 ## Installation
 
