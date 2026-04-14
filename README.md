@@ -109,3 +109,6 @@ Icon resources provided by: [Iconfont](https://www.iconfont.cn/collections/detai
 
 [MIT License](./LICENSE)
 
+## More Information
+
+For more information, please refer to my [blog post](https://blog.uuanqin.top/p/da4ac563/)(Chinese).

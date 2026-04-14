@@ -94,3 +94,7 @@ cover: /live-photo-cover.jpg
 ## 许可证
 
 [MIT License](./LICENSE)
+
+## 更多信息
+
+更多信息详看我的 [博客文章](https://blog.uuanqin.top/p/da4ac563/)。
