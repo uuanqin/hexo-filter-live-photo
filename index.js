@@ -36,7 +36,7 @@ class HexoLivePhoto {
     const filterFn = filter_logic(this.hexo, this.config);
     this.hexo.extend.filter.register('before_post_render', (data)=>{
       return filterFn(data);
-    },1);
+    },9);
   }
 
   // 注入资源文件
