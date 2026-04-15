@@ -21,7 +21,7 @@
   line-height: 0;
   margin: 20px auto;
   width: fit-content;
-  background: var(--live-bg-gray);
+  /*background: var(--live-bg-gray);*/ /* 保持透明背景，避免夜间模式下显示异常 */
   justify-content: center;
   align-items: center;
 }
