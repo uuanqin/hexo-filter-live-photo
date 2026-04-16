@@ -419,6 +419,23 @@
   transform: scale(1);
 }
 
+.live-photo-container.is-playing .live-badge::before {
+  background-color: #34c759; /* 变成 iOS 风格的绿色，代表 Active */
+  box-shadow: 0 0 8px rgba(52, 199, 89, 0.6);
+  animation: none; /* 停止加载时的黄色呼吸灯 */
+}
+
+.live-photo-container.is-playing .live-badge {
+  opacity: 0.6; /* 稍微半透明，让用户看清视频角落 */
+  transform: scale(0.95); /* 稍微缩小一点点，显得更精致 */
+  background: rgba(0, 0, 0, 0.4); /* 背景变淡 */
+}
+
+.live-photo-container.is-playing:hover .live-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* 添加一个小细节：点击时的按压反馈，让用户觉得更顺手 */
 .live-sound-toggle:active {
   transform: scale(0.9);

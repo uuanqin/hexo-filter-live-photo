@@ -62,7 +62,7 @@ class HexoLivePhoto {
 
     // 点击事件 - 在微信环境中这是主要的交互方式
     if (this.config.click_to_play) {
-      this.container.addEventListener("click", (e) => {
+      this.container.addEventListener("click", () => {
         this.play();
       });
     }
@@ -92,6 +92,7 @@ class HexoLivePhoto {
         this.staticImage.style.opacity = 0;
       }
       this.video.classList.add("playing");
+      this.container.classList.add('is-playing');
     });
 
     // 声音点击事件
@@ -211,6 +212,7 @@ class HexoLivePhoto {
   stop() {
     if (this.badgeTimer) clearTimeout(this.badgeTimer);
     this.container.classList.remove('is-loading');
+    this.container.classList.remove('is-playing');
     this.video.classList.remove("playing");
     this.staticImage.style.opacity = 1;
     this.isPlaying = false;

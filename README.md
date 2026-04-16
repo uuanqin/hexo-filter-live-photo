@@ -27,7 +27,7 @@ This plugin is a secondary development based on [@cykzht/hexo-live-photo](https:
 
 ## Demonstration
 
-![img](docs/images/demonstrate.gif)
+<img src="docs/images/demonstrate.gif" alt="demo" width="60%">
 
 You can also download this [Markdown file](./docs/live-photo-demonstration.md) and place it in your Hexo blog to test the effect.
 Alternatively, you can visit [this page](https://blog.uuanqin.top/p/6338f82f/) directly to see how the plugin performs under the Hexo-Butterfly theme.
@@ -111,4 +111,4 @@ Icon resources provided by: [Iconfont](https://www.iconfont.cn/collections/detai
 
 ## More Information
 
-For more information, please refer to my [blog post](https://blog.uuanqin.top/p/da4ac563/)(Chinese).
+For more information, please refer to my [blog post](https://blog.uuanqin.top/p/da4ac563/) (Chinese).
